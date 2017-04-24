@@ -432,7 +432,6 @@
             this.btSua.TabIndex = 5;
             this.btSua.Text = "Sửa";
             this.btSua.UseVisualStyleBackColor = true;
-            //this.btSua.Click += new System.EventHandler(this.btSua_Click);
             // 
             // btThem
             // 
@@ -442,7 +441,6 @@
             this.btThem.TabIndex = 5;
             this.btThem.Text = "Thêm ";
             this.btThem.UseVisualStyleBackColor = true;
-           // this.btThem.Click += new System.EventHandler(this.btThem_Click);
             // 
             // grvNhanVien
             // 
@@ -1363,7 +1361,6 @@
             this.btTemCV.TabIndex = 2;
             this.btTemCV.Text = "Thêm";
             this.btTemCV.UseVisualStyleBackColor = true;
-            //this.btTemCV.Click += new System.EventHandler(this.btTemCV_Click);
             // 
             // tbPhuCapChucVu
             // 
@@ -1894,6 +1891,7 @@
             // 
             // grvKhenThuong
             // 
+            this.grvKhenThuong.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grvKhenThuong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grvKhenThuong.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
@@ -2038,6 +2036,7 @@
             // 
             // grvTrinhDo
             // 
+            this.grvTrinhDo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grvTrinhDo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grvTrinhDo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column,
