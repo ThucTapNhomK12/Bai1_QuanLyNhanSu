@@ -220,6 +220,170 @@ namespace NhanSu
             btHuy.Visible = type == 2 ? true : false;
         }
         #endregion
+        #region"luong"  
+        private void Load_LuongNV()
+        {
+            LuongBLL luong = new LuongBLL();
+            grvLuong.DataSource = luong.GetData();
+        }
+
+
+        private void btThemLuong_Click(object sender, EventArgs e)
+        {
+            Query = "them";
+            ControllButton_luong(2);
+            tbMa.Text = "";
+            tbMaSoLuong.Text = "";
+            tbSoNgayCong.Text = "";
+            tbPhuCap.Text = "";
+            tbMaSL.Text = "";
+            tbGioLamThem.Text = "";
+            tbHeSoLuong.Text = "";
+            tbThuong.Text = "";
+            tbTamUng.Text = "";
+            tbNgayLap.Text = "";
+            tbMaSL.ReadOnly = false;
+        }
+
+        private void btSualuong_Click(object sender, EventArgs e)
+        {
+            Query = "sua";
+            ControllButton_luong(2);
+            tbMaSL.ReadOnly = true;
+        }
+
+
+        private void btLuuLuong_Click(object sender, EventArgs e)
+        {
+            Excute_luong(Query);
+            ControllButton_luong(1);
+        }
+
+        private void btHuyLuong_Click(object sender, EventArgs e)
+        {
+            ControllButton_luong(1);
+        }
+
+        private void btTinhLuong_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void Excute_luong(string query)
+        {
+            if (query == "them")
+            {
+                try
+                {
+                    LuongEntities obj_luong = new LuongEntities();
+                    obj_luong.MaNV1 = tbMa.Text.Trim();
+                    obj_luong.MaSL1 = tbMaSL.Text.Trim();
+                    obj_luong.SoNgayCong1 = Convert.ToInt32(tbSoNgayCong.Text);
+                    obj_luong.PhuCapCV1 = Convert.ToInt32(tbPhuCap.Text);
+                    obj_luong.HeSoLuong1 = tbHeSoLuong.Text.Trim();
+                    obj_luong.SoGiolamThem1 = Convert.ToInt32(tbGioLamThem.Text);
+                    obj_luong.Thuong1 = Convert.ToInt32(tbThuong.Text);
+                    obj_luong.TamUng1 = Convert.ToInt32(tbTamUng.Text);
+                    /*obj_luong.MaSoLuong1 = tbMaSoLuong.Text.Trim();
+                    obj_luong.SoNgayCong1 = tbSoNgayCong.Text.Trim();
+                    obj_luong.PhuCapCV1 = tbPhuCap.Text.Trim();
+                    obj_luong.MaSL1=tbMaSL.Text.Trim();
+                    obj_luong.SoGiolamThem1 = tbGioLamThem.Text.Trim();
+                    obj_luong.HeSoLuong1 = tbHeSoLuong.Text.Trim();
+                    obj_luong.Thuong1 = tbThuong.Text.Trim();
+                    obj_luong.TamUng1 = tbTamUng.Text.Trim();*/
+                    obj_luong.NgayLap1 = tbNgayLap.Text.Trim();
+                    LuongBLL luong = new LuongBLL();
+                    // string MaSoLuong = tbMaSL.Text.Trim();
+                    if (!(luong.Checkluong(tbMaSL.Text.Trim())))
+                    {
+                        luong.insert(obj_luong);
+                        Load_LuongNV();
+                    }
+                    else
+                        MessageBox.Show("ma so luong nhan vien" + manv + "da ton tai", "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("them bi loi" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            if (query == "sua")
+            {
+                try
+                {
+                    LuongEntities obj_luong = new LuongEntities();
+                    obj_luong.MaNV1 = tbMa.Text.Trim();
+                    obj_luong.MaSL1 = tbMaSL.Text.Trim();
+                    obj_luong.SoNgayCong1 = Convert.ToInt32(tbSoNgayCong.Text);
+                    obj_luong.PhuCapCV1 = Convert.ToInt32(tbPhuCap.Text);
+                    obj_luong.HeSoLuong1 = tbHeSoLuong.Text.Trim();
+                    obj_luong.SoGiolamThem1 = Convert.ToInt32(tbGioLamThem.Text);
+                    obj_luong.Thuong1 = Convert.ToInt32(tbThuong.Text);
+                    obj_luong.TamUng1 = Convert.ToInt32(tbTamUng.Text);
+                    /*obj_luong.MaSoLuong1 = tbMaSoLuong.Text.Trim();
+                    obj_luong.SoNgayCong1 = tbSoNgayCong.Text.Trim();
+                    obj_luong.PhuCapCV1 = tbPhuCap.Text.Trim();
+                    obj_luong.SoGiolamThem1 = tbGioLamThem.Text.Trim();
+                    obj_luong.HeSoLuong1 = Convert.ToInt32(tbHeSoLuong.Text);
+                    obj_luong.Thuong1 = tbThuong.Text.Trim();
+                    obj_luong.TamUng1 = tbTamUng.Text.Trim();*/
+                    obj_luong.NgayLap1 = tbNgayLap.Text.Trim();
+                    LuongBLL luong = new LuongBLL();
+                    string MaSoLuong = tbMaSL.Text.Trim();
+                    luong.update(obj_luong);
+                    Load_LuongNV();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("them bi loi" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            if (query == "xoa")
+            {
+                try
+                {
+                    string MaSoLuong = tbMaSL.Text.Trim();
+                    LuongBLL luong = new LuongBLL();
+                    luong.delete(MaSoLuong);
+                    Load_LuongNV();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("xoa bi loi" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+
+        }
+        private void btXoaLuong_Click(object sender, EventArgs e)
+        {
+            Query = "xoa";
+            ControllButton_luong(2);
+        }
+
+        private void grvLuong_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;
+            //tbMa.Text = grvLuong["Column1", index].Value.ToString();
+            tbMaSoLuong.Text = grvLuong["MaSoLuong", index].Value.ToString();
+            tbSoNgayCong.Text = grvLuong["SoNgayCong", index].Value.ToString();
+            tbPhuCap.Text = grvLuong["PhuCapCV", index].Value.ToString();
+            tbMaSL.Text = grvLuong["MaSoLuong", index].Value.ToString();
+            tbGioLamThem.Text = grvLuong["SoGioLamThem", index].Value.ToString();
+            tbHeSoLuong.Text = grvLuong["HeSoLuong", index].Value.ToString();
+            tbThuong.Text = grvLuong["Thuong", index].Value.ToString();
+            tbTamUng.Text = grvLuong["TamUng", index].Value.ToString();
+            tbNgayLap.Text = grvLuong["NgayLap", index].Value.ToString();
+        }
+        private void ControllButton_luong(int type)
+        {
+            btThemLuong.Visible = type == 1 ? true : false;
+            btSualuong.Visible = type == 1 ? true : false;
+            btXoaLuong.Visible = type == 1 ? true : false;
+            btLuuLuong.Visible = type == 2 ? true : false;
+            btHuyLuong.Visible = type == 2 ? true : false;
+        }
+
+        #endregion
 
         #region"khenthuong"
         private void Load_khenthuong()
