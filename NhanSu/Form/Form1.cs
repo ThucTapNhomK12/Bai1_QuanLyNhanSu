@@ -39,6 +39,187 @@ namespace NhanSu
             cbbMaTDHV.DisplayMember = "TDHV";
             cbbMaTDHV.ValueMember = "MaTDHV";
         }
+		
+		#region"NhanVien"
+        private void btThem_Click(object sender, EventArgs e)
+        {
+            //kho tao doi tuong
+            Query = "them";
+            ControllButton(2);
+            tbMaNV.Text = "";
+            tbHoTen.Text = "";
+            tbNamSinh.Text = "";
+            tbGioiTinh.Text = "";
+            tbDiaChi.Text = "";
+            tbDanToc.Text = "";
+            tbTonGiao.Text = "";
+            tbCMTND.Text = "";
+            tbHonNhan.Text = "";
+            tbSoDienThoai.Text = "";
+            tbGhiChu.Text = "";
+            tbMaSoLuong.Text = "";
+            cbbMaPhongBan.SelectedValue = "";
+            tbMaPhongBan.Text = "";
+            cbbMaChucVu.SelectedValue = "";
+            cbbMaTDHV.SelectedValue = "";
+            tbNgoaiNgu.Text = "";
+            tbMaHopDong.Text = "";
+            tbBaoHiem.Text = "";
+            cbbMaKhenThuong.SelectedValue = "";
+            cbbMaKyLuat.SelectedValue = "";
+            tbMa.ReadOnly = false;
+        }
+        private void Excute(string query)
+        {
+            if (query == "them")
+            {
+                try
+                {
+                    NhanVienEntities obj_nv = new NhanVienEntities();
+                    obj_nv.Manv = tbMaNV.Text.Trim();
+                    obj_nv.Hoten = tbHoTen.Text.Trim();
+                    obj_nv.Ngaysinh = tbNamSinh.Text.Trim();
+                    obj_nv.Gioitinh = tbGioiTinh.Text.Trim();
+                    obj_nv.DiaChi = tbDiaChi.Text.Trim();
+                    obj_nv.Dantoc = tbDanToc.Text.Trim();
+                    obj_nv.TonGiao = tbTonGiao.Text.Trim();
+                    obj_nv.CMTND = tbCMTND.Text.Trim();
+                    obj_nv.TinhTrangHonNhan = tbHonNhan.Text.Trim();
+                    obj_nv.MaPhongBan = cbbMaPhongBan.SelectedValue.ToString().Trim();
+                    obj_nv.SoDienThoai = tbSoDienThoai.Text.Trim();
+                    obj_nv.GhiChu = tbGhiChu.Text.Trim();
+                    // obj_nv.MaSoLuong = tbMaSoLuong.Text.Trim();
+                    obj_nv.MaChucVu = cbbMaChucVu.SelectedValue.ToString().Trim();
+                    obj_nv.MaTDHV = cbbMaTDHV.SelectedValue.ToString().Trim();
+                    obj_nv.NgoaiNgu = tbNgoaiNgu.Text.Trim();
+                    obj_nv.MaHD = tbMaHopDong.Text.Trim();
+                    obj_nv.MaSBH = tbBaoHiem.Text.Trim();
+                    obj_nv.MaKT = cbbMaKhenThuong.SelectedValue.ToString().Trim();
+                    obj_nv.MaKL = cbbMaKyLuat.SelectedValue.ToString().Trim();
+                   
+                    NhanVienBLL nv = new NhanVienBLL();
+                    if (!(nv.CheckID(tbMaNV.Text.Trim())))
+                    {
+                        nv.insert(obj_nv);
+                        Load_Data();
+                    }
+                    else
+                        MessageBox.Show("ma nhan vien" + manv + "da ton tai", "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("them bi loi" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+            }
+            if (query == "sua")
+            {
+                try
+                {
+                    NhanVienEntities obj_nv = new NhanVienEntities();
+                    obj_nv.Manv = tbMaNV.Text.Trim();
+                    obj_nv.Hoten = tbHoTen.Text.Trim();
+                    obj_nv.Ngaysinh = tbNamSinh.Text.Trim();
+                    obj_nv.Gioitinh = tbGioiTinh.Text.Trim();
+                    obj_nv.DiaChi = tbDiaChi.Text.Trim();
+                    obj_nv.Dantoc = tbDanToc.Text.Trim();
+                    obj_nv.TonGiao = tbTonGiao.Text.Trim();
+                    obj_nv.CMTND = tbCMTND.Text.Trim();
+                    obj_nv.TinhTrangHonNhan = tbHonNhan.Text.Trim();
+                    obj_nv.SoDienThoai = tbSoDienThoai.Text.Trim();
+                    obj_nv.GhiChu = tbGhiChu.Text.Trim();
+                    obj_nv.MaSoLuong = tbMaSoLuong.Text.Trim();
+                    obj_nv.MaPhongBan = cbbMaPhongBan.SelectedValue.ToString().Trim();
+                    obj_nv.MaChucVu = cbbMaChucVu.SelectedValue.ToString().Trim();
+                    obj_nv.MaTDHV = cbbMaTDHV.SelectedValue.ToString().Trim();
+                    obj_nv.NgoaiNgu = tbNgoaiNgu.Text.Trim();
+                    obj_nv.MaHD = tbMaHopDong.Text.Trim();
+                    obj_nv.MaSBH = tbBaoHiem.Text.Trim();
+                    obj_nv.MaKL = cbbMaKyLuat.SelectedValue.ToString().Trim();
+                    obj_nv.MaKT = cbbMaKhenThuong.SelectedValue.ToString().Trim();
+                    NhanVienBLL nv = new NhanVienBLL();
+                    //string manv = tbMaNV.Text.Trim();
+                    nv.update(obj_nv);
+                    Load_Data();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("sua bi loi" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            if (query == "xoa")
+            {
+                try
+                {
+                    string manv = tbMa.Text.Trim();
+                    NhanVienBLL nv = new NhanVienBLL();
+                    nv.delete(manv);
+                    Load_Data();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("xoa bi loi" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        private void btSua_Click(object sender, EventArgs e)
+        {
+            Query = "sua";
+            ControllButton(2);
+            tbMa.ReadOnly = true;
+        }
+
+        private void btXoa_Click(object sender, EventArgs e)
+        {
+            Query = "xoa";
+            ControllButton(2);
+        }
+
+        private void grvNhanVien_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;
+            tbMaNV.Text = grvNhanVien["manv", index].Value.ToString();
+            tbHoTen.Text = grvNhanVien["hoten", index].Value.ToString();
+            tbNamSinh.Text = grvNhanVien["ngaysinh", index].Value.ToString();
+            tbGioiTinh.Text = grvNhanVien["gioitinh", index].Value.ToString();
+            tbDiaChi.Text = grvNhanVien["diachi", index].Value.ToString();
+            tbDanToc.Text = grvNhanVien["dantoc", index].Value.ToString();
+            tbTonGiao.Text = grvNhanVien["tongiao", index].Value.ToString();
+            tbCMTND.Text = grvNhanVien["cmtnd", index].Value.ToString();
+            tbHonNhan.Text = grvNhanVien["honnhan", index].Value.ToString();
+            tbSoDienThoai.Text = grvNhanVien["sodienthoai", index].Value.ToString();
+            tbGhiChu.Text = grvNhanVien["ghichu", index].Value.ToString();
+           // tbMaSoLuong.Text = grvNhanVien["masl", index].Value.ToString();
+            cbbMaPhongBan.SelectedValue = grvNhanVien["mapb", index].Value.ToString();
+            cbbMaChucVu.SelectedValue = grvNhanVien["macv", index].Value.ToString();
+            cbbMaTDHV.SelectedValue = grvNhanVien["hocvan", index].Value.ToString();
+            tbNgoaiNgu.Text = grvNhanVien["ngoaingu", index].Value.ToString();
+            tbMaHopDong.Text = grvNhanVien["mahd", index].Value.ToString();
+            tbBaoHiem.Text = grvNhanVien["mabaohiem", index].Value.ToString();
+            cbbMaKyLuat.SelectedValue = grvNhanVien["makl", index].Value.ToString();
+            cbbMaKhenThuong.SelectedValue = grvNhanVien["makt", index].Value.ToString();
+        }
+
+        private void btluu_Click(object sender, EventArgs e)
+        {
+            Excute(Query);
+            ControllButton(1);
+        }
+
+        private void btHuy_Click(object sender, EventArgs e)
+        {
+            ControllButton(1);
+        }
+        private void ControllButton(int type)
+        {
+            btThem.Visible = type == 1 ? true : false;
+            btSua.Visible = type == 1 ? true : false;
+            btXoa.Visible = type == 1 ? true : false;
+            btluu.Visible = type == 2 ? true : false;
+            btHuy.Visible = type == 2 ? true : false;
+        }
+        #endregion
 
         #region"khenthuong"
         private void Load_khenthuong()
