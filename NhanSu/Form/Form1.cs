@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NhanSu.Business;
 using NhanSu.Entities;
+
 namespace NhanSu
 {
     public partial class Form1 : Form
@@ -21,15 +22,43 @@ namespace NhanSu
         private void Form1_Load(object sender, EventArgs e)
         {
             Load_Data();
-
+            Load_LuongNV();
+            Load_ChucVu();
+            Load_PhongBan();
+            Load_HopDong();
+            Load_kyluat();
             Load_khenthuong();
-
+            Load_trinhdohocvan();
+            Load_baohiem();
+            Load_timkiem();
+            ControllButton(1);
+            ControllButton_luong(1);
+            ControllButton_chucvu(1);
+            ControllButton_phongban(1);
+            ControllButton_hopdong(1);
+            ControllButton_kyluat(1);
             ControllButton_khenthuong(1);
-
+            ControllButton_trinhdo(1);
+            ControllButton_baohiem(1);
         }
         private void Load_Data()
         {
+            NhanVienBLL nvBLL = new NhanVienBLL();
+            grvNhanVien.DataSource = nvBLL.GetData();
             //fill combobox
+            LuongBLL luong = new LuongBLL();
+            PhongBanBLL phongbanbll = new PhongBanBLL();
+            cbbMaPhongBan.DataSource = phongbanbll.GetData();
+            cbbMaPhongBan.DisplayMember = "TenPhongBan";
+            cbbMaPhongBan.ValueMember = "MaPhongBan";
+            ChucVuBLL chucvubll = new ChucVuBLL();
+            cbbMaChucVu.DataSource = chucvubll.GetData();
+            cbbMaChucVu.DisplayMember = "TenChucVu";
+            cbbMaChucVu.ValueMember = "MaChucVu";
+            KyLuatBLL kyluatbll = new KyLuatBLL();
+            cbbMaKyLuat.DataSource = kyluatbll.GetData();
+            cbbMaKyLuat.DisplayMember = "HinhThucKL";
+            cbbMaKyLuat.ValueMember = "MaKl";
             KhenThuongBLL khenthuongbll = new KhenThuongBLL();
             cbbMaKhenThuong.DataSource = khenthuongbll.GetData();
             cbbMaKhenThuong.DisplayMember = "HinhThucKT";
@@ -39,8 +68,7 @@ namespace NhanSu
             cbbMaTDHV.DisplayMember = "TDHV";
             cbbMaTDHV.ValueMember = "MaTDHV";
         }
-		
-		#region"NhanVien"
+        #region"NhanVien"
         private void btThem_Click(object sender, EventArgs e)
         {
             //kho tao doi tuong
@@ -220,14 +248,15 @@ namespace NhanSu
             btHuy.Visible = type == 2 ? true : false;
         }
         #endregion
-        #region"luong"  
+
+        #region"luong"
         private void Load_LuongNV()
         {
             LuongBLL luong = new LuongBLL();
             grvLuong.DataSource = luong.GetData();
         }
 
-
+     
         private void btThemLuong_Click(object sender, EventArgs e)
         {
             Query = "them";
@@ -247,12 +276,12 @@ namespace NhanSu
 
         private void btSualuong_Click(object sender, EventArgs e)
         {
-            Query = "sua";
-            ControllButton_luong(2);
-            tbMaSL.ReadOnly = true;
+             Query = "sua";
+             ControllButton_luong(2);
+             tbMaSL.ReadOnly = true;
         }
 
-
+     
         private void btLuuLuong_Click(object sender, EventArgs e)
         {
             Excute_luong(Query);
@@ -266,7 +295,7 @@ namespace NhanSu
 
         private void btTinhLuong_Click(object sender, EventArgs e)
         {
-
+        
         }
         private void Excute_luong(string query)
         {
@@ -293,7 +322,7 @@ namespace NhanSu
                     obj_luong.TamUng1 = tbTamUng.Text.Trim();*/
                     obj_luong.NgayLap1 = tbNgayLap.Text.Trim();
                     LuongBLL luong = new LuongBLL();
-                    // string MaSoLuong = tbMaSL.Text.Trim();
+                   // string MaSoLuong = tbMaSL.Text.Trim();
                     if (!(luong.Checkluong(tbMaSL.Text.Trim())))
                     {
                         luong.insert(obj_luong);
@@ -385,40 +414,39 @@ namespace NhanSu
 
         #endregion
 
-        #region"khenthuong"
-        private void Load_khenthuong()
+#region"ChucVu"
+        private void Load_ChucVu()
         {
-            KhenThuongBLL khenthuongbll = new KhenThuongBLL();
-            grvKhenThuong.DataSource = khenthuongbll.GetData();
+            ChucVuBLL chucvubll = new ChucVuBLL();
+            grvChucVu.DataSource = chucvubll.GetData();
         }
-        private void btThemKT_Click(object sender, EventArgs e)
+        private void btTemCV_Click(object sender, EventArgs e)
         {
             Query = "them";
-            ControllButton_khenthuong(2);
-            tbMaKT.Text = "";
-            tbHinhThucKT.Text = "";
-            tbLyDo.Text = "";
-            tbMaKT.ReadOnly = false; ;
+            ControllButton_chucvu(2);
+            tbMaChucVu.Text = "";
+            tbTenChucVu.Text = "";
+            tbPhuCapChucVu.Text = "";
         }
-        private void Excute_khenthuong(string querykt)
+        private void Excute_chucvu(string querycv)
         {
-            if (querykt == "them")
+            if (querycv == "them")
             {
                 try
                 {
                     //khoi tao doi tuong
-                    KhenThuongEntities khenthuongenti = new KhenThuongEntities();
-                    khenthuongenti.Makhenthuong = tbMaKT.Text.Trim();
-                    khenthuongenti.Hinhthuckhenthuong = tbHinhThucKT.Text.Trim();
-                    khenthuongenti.Lydokhenthuong = tbLyDo.Text.Trim();
-                    KhenThuongBLL khenthuongbll = new KhenThuongBLL();
-                    if (!(khenthuongbll.Checkkt(tbMaKT.Text.Trim())))
+                    ChucVuEntities chucvuenti = new ChucVuEntities();
+                    chucvuenti.Macv = tbMaChucVu.Text.Trim();
+                    chucvuenti.Tencv = tbTenChucVu.Text.Trim();
+                    chucvuenti.Phucapcv = tbPhuCapChucVu.Text.Trim();
+                    ChucVuBLL chucvubll = new ChucVuBLL();
+                    if (!(chucvubll.Checkid(tbMaChucVu.Text.Trim())))
                     {
-                        khenthuongbll.insert(khenthuongenti);
-                        Load_khenthuong();
+                        chucvubll.Insert(chucvuenti);
+                        Load_ChucVu();
                     }
                     else
-                        MessageBox.Show("Ma khen thuong:" + makt + "da ton tai", "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Ma lop:" + macv + "da ton tai", "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 catch (Exception ex)
                 {
@@ -426,32 +454,32 @@ namespace NhanSu
 
                 }
             }
-            if (querykt == "sua")
+            if (querycv == "sua")
             {
                 try
                 {
                     //khoi tao doi tuong
-                    KhenThuongEntities khenthuongenti = new KhenThuongEntities();
-                    khenthuongenti.Makhenthuong = tbMaKT.Text.Trim();
-                    khenthuongenti.Hinhthuckhenthuong = tbHinhThucKT.Text.Trim();
-                    khenthuongenti.Lydokhenthuong = tbLyDo.Text.Trim();
-                    KhenThuongBLL khenthuongbll = new KhenThuongBLL();
-                    khenthuongbll.update(khenthuongenti);
-                    Load_khenthuong();
+                    ChucVuEntities chucvuenti = new ChucVuEntities();
+                    chucvuenti.Macv = tbMaChucVu.Text.Trim();
+                    chucvuenti.Tencv = tbTenChucVu.Text.Trim();
+                    chucvuenti.Phucapcv = tbPhuCapChucVu.Text.Trim();
+                    ChucVuBLL chucvubll = new ChucVuBLL();
+                    chucvubll.update(chucvuenti);
+                    Load_ChucVu();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("sua bi loi:" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            if (querykt == "xoa")
+            if (querycv == "xoa")
             {
                 try
                 {
-                    string makt = tbMaKT.Text.Trim();
-                    KhenThuongBLL khenthuongbll = new KhenThuongBLL();
-                    khenthuongbll.delete(makt);
-                    Load_khenthuong();
+                    string macv = tbMaChucVu.Text.Trim();
+                    ChucVuBLL chucvubll = new ChucVuBLL();
+                    chucvubll.delete(macv);
+                    Load_ChucVu();
                 }
                 catch (Exception ex)
                 {
@@ -459,80 +487,81 @@ namespace NhanSu
                 }
             }
         }
-        private void btSuaKT_Click(object sender, EventArgs e)
+
+        private void btSuaCV_Click(object sender, EventArgs e)
         {
             Query = "sua";
-            ControllButton_khenthuong(2);
-            tbMaKT.ReadOnly = true;
+            ControllButton_chucvu(2);
+            tbMaChucVu.ReadOnly = true;
         }
 
-        private void btXoaKT_Click(object sender, EventArgs e)
+        private void btXoaCV_Click(object sender, EventArgs e)
         {
             Query = "xoa";
-            ControllButton_khenthuong(2);
+            ControllButton_chucvu(2);
         }
 
-        private void btLuuKT_Click(object sender, EventArgs e)
+        private void btLuuCV_Click(object sender, EventArgs e)
         {
-            Excute_khenthuong(Query);
-            ControllButton_khenthuong(1);
+            Excute_chucvu(Query);
+            ControllButton_chucvu(1);
         }
 
-        private void btHuyKT_Click(object sender, EventArgs e)
+        private void btHuyCV_Click(object sender, EventArgs e)
         {
-            ControllButton_khenthuong(1);
-        }
-        private void ControllButton_khenthuong(int type)
-        {
-            btThemKT.Visible = type == 1 ? true : false;
-            btSuaKT.Visible = type == 1 ? true : false;
-            btXoaKT.Visible = type == 1 ? true : false;
-            btLuuKT.Visible = type == 2 ? true : false;
-            btHuyKT.Visible = type == 2 ? true : false;
+            ControllButton_chucvu(1);
         }
 
-        private void grvKhenThuong_RowEnter(object sender, DataGridViewCellEventArgs e)
+        private void grvChucVu_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
-            tbMaKT.Text = grvKhenThuong["Column3", index].Value.ToString();
-            tbHinhThucKT.Text = grvKhenThuong["HinhThucKT", index].Value.ToString();
-            tbLyDo.Text = grvKhenThuong["Column4", index].Value.ToString();
+            tbMaChucVu.Text = grvChucVu["MaChucVu", index].Value.ToString();
+            tbTenChucVu.Text = grvChucVu["TenChucVu", index].Value.ToString();
+            tbPhuCapChucVu.Text = grvChucVu["PhuCap", index].Value.ToString();
         }
-        #endregion
-
-        #region"hocvan"
-        private void Load_trinhdohocvan()
+        private void ControllButton_chucvu(int type)
         {
-            TrinhDoHocVanBLL trinhdobll = new TrinhDoHocVanBLL();
-            grvTrinhDo.DataSource = trinhdobll.GetData();
+            btTemCV.Visible = type == 1 ? true : false;
+            btSuaCV.Visible = type == 1 ? true : false;
+            btXoaCV.Visible = type == 1 ? true : false;
+            btLuuCV.Visible = type == 2 ? true : false;
+            btHuyCV.Visible = type == 2 ? true : false;
         }
-        private void btThemTD_Click(object sender, EventArgs e)
+#endregion
+        #region"phongban"
+        private void Load_PhongBan()
+        {
+            PhongBanBLL phongbanbll = new PhongBanBLL();
+            grvPhongBan.DataSource = phongbanbll.GetData();
+        }
+
+        private void btThemPB_Click(object sender, EventArgs e)
         {
             Query = "them";
-            ControllButton_trinhdo(2);
-            tbMaTDHV.Text = "";
-            tbTrinhDo.Text = "";
-            tbChuyenNganh.Text = "";
+            ControllButton_phongban(2);
+            tbMaPhongBan.Text = "";
+            tbTenPhongBan.Text = "";
+            tbSDTPhongBan.Text = "";
         }
-        private void Excute_trinhdo(string querytd)
+        private void Excute_phongban(string querypb)
         {
-            if (querytd == "them")
+            if (querypb == "them")
             {
                 try
                 {
                     //khoi tao doi tuong
-                    TrinhDoHocVanEntities trinhdoenti = new TrinhDoHocVanEntities();
-                    trinhdoenti.Matrinhdohocvan = tbMaTDHV.Text.Trim();
-                    trinhdoenti.Trinhdohocvan = tbTrinhDo.Text.Trim();
-                    trinhdoenti.Chuyennganh = tbChuyenNganh.Text.Trim();
-                    TrinhDoHocVanBLL trinhdobll = new TrinhDoHocVanBLL();
-                    if (!(trinhdobll.Checktdhv(tbMaTDHV.Text.Trim())))
+                    PhongBanEntities phongbanenti = new PhongBanEntities();
+                    phongbanenti.Mapb = tbMaPhongBan.Text.Trim();
+                    phongbanenti.Tenpb = tbTenPhongBan.Text.Trim();
+                    phongbanenti.Sdt = tbSDTPhongBan.Text.Trim();
+                    PhongBanBLL phongbanbll = new PhongBanBLL();
+                    if (!(phongbanbll.Checkpb(tbMaPhongBan.Text.Trim())))
                     {
-                        trinhdobll.Insert(trinhdoenti);
-                        Load_trinhdohocvan();
+                        phongbanbll.Insert(phongbanenti);
+                        Load_PhongBan();
                     }
                     else
-                        MessageBox.Show("Ma trinh do hoc van:" + Matrinhdohocvan + "da ton tai", "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Ma phong ban:" + MaPhongBan+ "da ton tai", "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 catch (Exception ex)
                 {
@@ -540,83 +569,78 @@ namespace NhanSu
 
                 }
             }
-            if (querytd == "sua")
+            if (querypb == "sua")
             {
                 try
                 {
                     //khoi tao doi tuong
-                    TrinhDoHocVanEntities trinhdoenti = new TrinhDoHocVanEntities();
-                    trinhdoenti.Matrinhdohocvan = tbMaTDHV.Text.Trim();
-                    trinhdoenti.Trinhdohocvan = tbTrinhDo.Text.Trim();
-                    trinhdoenti.Chuyennganh = tbChuyenNganh.Text.Trim();
-                    TrinhDoHocVanBLL trinhdobll = new TrinhDoHocVanBLL();
-                    trinhdobll.update(trinhdoenti);
-                    Load_trinhdohocvan();
+                    PhongBanEntities phongbanenti = new PhongBanEntities();
+                    phongbanenti.Mapb = tbMaPhongBan.Text.Trim();
+                    phongbanenti.Tenpb = tbTenPhongBan.Text.Trim();
+                    phongbanenti.Sdt = tbSDTPhongBan.Text.Trim();
+                    PhongBanBLL phongbanbll = new PhongBanBLL();
+                    phongbanbll.update(phongbanenti);
+                    Load_PhongBan();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("sua bi loi:" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            if (querytd == "xoa")
+            if (querypb == "xoa")
             {
                 try
                 {
-                    string matdhv = tbMaTDHV.Text.Trim();
-                    TrinhDoHocVanBLL trinhdobll = new TrinhDoHocVanBLL();
-                    trinhdobll.delete(matdhv);
-                    Load_trinhdohocvan();
+                    string Mapb = tbMaPhongBan.Text.Trim();
+                    PhongBanBLL phongbanbll = new PhongBanBLL();
+                    phongbanbll.delete(Mapb);
+                    Load_PhongBan();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("xoa bi loi:" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("sua bi loi:" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
-        private void grvTrinhDo_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            int index = e.RowIndex;
-            tbMaTDHV.Text = grvTrinhDo["Column", index].Value.ToString();
-            tbTrinhDo.Text = grvTrinhDo["TDHV", index].Value.ToString();
-            tbChuyenNganh.Text = grvTrinhDo["ChuyenNganh", index].Value.ToString();
-        }
-        private void btSuaTD_Click(object sender, EventArgs e)
+        private void btSuaPB_Click(object sender, EventArgs e)
         {
             Query = "sua";
-            ControllButton_trinhdo(2);
-            tbMaTDHV.ReadOnly = true;
+            ControllButton_phongban(2);
+            tbMaPhongBan.ReadOnly = true;
         }
 
-        private void btXoaTD_Click(object sender, EventArgs e)
+        private void btXoaPB_Click(object sender, EventArgs e)
         {
             Query = "xoa";
-            ControllButton_trinhdo(2);
+            ControllButton_phongban(2);
         }
-
-        private void btLuuTD_Click(object sender, EventArgs e)
+        private void grvPhongBan_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            Excute_trinhdo(Query);
-            ControllButton_trinhdo(1);
+            int index = e.RowIndex;
+            tbMaPhongBan.Text = grvPhongBan["MaPhongBan", index].Value.ToString();
+            tbTenPhongBan.Text = grvPhongBan["TenPhongBan", index].Value.ToString();
+            tbSDTPhongBan.Text = grvPhongBan["sdt", index].Value.ToString();
         }
-
-        private void btHuyTD_Click(object sender, EventArgs e)
+        private void btLuuPB_Click(object sender, EventArgs e)
         {
-            ControllButton_trinhdo(1);
+            Excute_phongban(Query);
+            ControllButton_phongban(1);
         }
-        private void ControllButton_trinhdo(int type)
+
+        private void btHuyPB_Click(object sender, EventArgs e)
         {
-            btThemTD.Visible = type == 1 ? true : false;
-            btSuaTD.Visible = type == 1 ? true : false;
-            btXoaTD.Visible = type == 1 ? true : false;
-            btLuuTD.Visible = type == 2 ? true : false;
-            btHuyTD.Visible = type == 2 ? true : false;
+            ControllButton_phongban(1);
         }
-
-
-        public string Matrinhdohocvan { get; set; }
+        private void ControllButton_phongban(int type)
+        {
+            btThemPB.Visible = type == 1 ? true : false;
+            btSuaPB.Visible = type == 1 ? true : false;
+            btXoaPB.Visible = type == 1 ? true : false;
+            btLuuPB.Visible = type == 2 ? true : false;
+            btHuyPB.Visible = type == 2 ? true : false;
+        }
         #endregion
-		
-		#region"hopdong"
+        #region"hopdong"
         private void Load_HopDong()
         {
             HopDongBLL hopdongbll = new HopDongBLL();
@@ -729,7 +753,6 @@ namespace NhanSu
             btHuyHD.Visible = type == 2 ? true : false;
         }
         #endregion
-		
         #region"kyLuat"
         private void Load_kyluat()
         {
@@ -844,6 +867,453 @@ namespace NhanSu
             tbLyDoKL.Text = grvKyLuat["LyDo", index].Value.ToString();
         }
 #endregion
+        #region"khenthuong"
+        private void Load_khenthuong()
+        {
+            KhenThuongBLL khenthuongbll = new KhenThuongBLL();
+            grvKhenThuong.DataSource = khenthuongbll.GetData();
+        }
+        private void btThemKT_Click(object sender, EventArgs e)
+        {
+            Query = "them";
+            ControllButton_khenthuong(2);
+            tbMaKT.Text = "";
+            tbHinhThucKT.Text = "";
+            tbLyDo.Text = "";
+            tbMaKT.ReadOnly = false; ;
+        }
+        private void Excute_khenthuong(string querykt)
+        {
+            if (querykt == "them")
+            {
+                try
+                {
+                    //khoi tao doi tuong
+                    KhenThuongEntities khenthuongenti = new KhenThuongEntities();
+                    khenthuongenti.Makhenthuong = tbMaKT.Text.Trim();
+                    khenthuongenti.Hinhthuckhenthuong = tbHinhThucKT.Text.Trim();
+                    khenthuongenti.Lydokhenthuong = tbLyDo.Text.Trim();
+                    KhenThuongBLL khenthuongbll = new KhenThuongBLL();
+                    if (!(khenthuongbll.Checkkt(tbMaKT.Text.Trim())))
+                    {
+                        khenthuongbll.insert(khenthuongenti);
+                        Load_khenthuong();
+                    }
+                    else
+                        MessageBox.Show("Ma khen thuong:" + makt + "da ton tai", "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("them bi loi:" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+            }
+            if (querykt == "sua")
+            {
+                try
+                {
+                    //khoi tao doi tuong
+                    KhenThuongEntities khenthuongenti = new KhenThuongEntities();
+                    khenthuongenti.Makhenthuong = tbMaKT.Text.Trim();
+                    khenthuongenti.Hinhthuckhenthuong = tbHinhThucKT.Text.Trim();
+                    khenthuongenti.Lydokhenthuong = tbLyDo.Text.Trim();
+                    KhenThuongBLL khenthuongbll = new KhenThuongBLL();
+                    khenthuongbll.update(khenthuongenti);
+                    Load_khenthuong();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("sua bi loi:" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            if (querykt == "xoa")
+            {
+                try
+                {
+                    string makt = tbMaKT.Text.Trim();
+                    KhenThuongBLL khenthuongbll = new KhenThuongBLL();
+                    khenthuongbll.delete(makt);
+                    Load_khenthuong();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("sua bi loi:" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+        private void btSuaKT_Click(object sender, EventArgs e)
+        {
+            Query = "sua";
+            ControllButton_khenthuong(2);
+            tbMaKT.ReadOnly = true;
+        }
+
+        private void btXoaKT_Click(object sender, EventArgs e)
+        {
+            Query = "xoa";
+            ControllButton_khenthuong(2);
+        }
+
+        private void btLuuKT_Click(object sender, EventArgs e)
+        {
+            Excute_khenthuong(Query);
+            ControllButton_khenthuong(1);
+        }
+
+        private void btHuyKT_Click(object sender, EventArgs e)
+        {
+            ControllButton_khenthuong(1);
+        }
+        private void ControllButton_khenthuong(int type)
+        {
+            btThemKT.Visible = type == 1 ? true : false;
+            btSuaKT.Visible = type == 1 ? true : false;
+            btXoaKT.Visible = type == 1 ? true : false;
+            btLuuKT.Visible = type == 2 ? true : false;
+            btHuyKT.Visible = type == 2 ? true : false;
+        }
+
+        private void grvKhenThuong_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;
+            tbMaKT.Text = grvKhenThuong["Column3", index].Value.ToString();
+            tbHinhThucKT.Text = grvKhenThuong["HinhThucKT", index].Value.ToString();
+            tbLyDo.Text = grvKhenThuong["Column4", index].Value.ToString();
+        }
+#endregion
+        #region"hocvan"
+        private void Load_trinhdohocvan()
+        {
+            TrinhDoHocVanBLL trinhdobll = new TrinhDoHocVanBLL();
+            grvTrinhDo.DataSource = trinhdobll.GetData();
+        }
+        private void btThemTD_Click(object sender, EventArgs e)
+        {
+            Query = "them";
+            ControllButton_trinhdo(2);
+            tbMaTDHV.Text = "";
+            tbTrinhDo.Text = "";
+            tbChuyenNganh.Text = "";
+        }
+        private void Excute_trinhdo(string querytd)
+        {
+            if (querytd == "them")
+            {
+                try
+                {
+                    //khoi tao doi tuong
+                    TrinhDoHocVanEntities trinhdoenti = new TrinhDoHocVanEntities();
+                    trinhdoenti.Matrinhdohocvan = tbMaTDHV.Text.Trim();
+                    trinhdoenti.Trinhdohocvan = tbTrinhDo.Text.Trim();
+                    trinhdoenti.Chuyennganh = tbChuyenNganh.Text.Trim();
+                    TrinhDoHocVanBLL trinhdobll = new TrinhDoHocVanBLL();
+                    if (!(trinhdobll.Checktdhv(tbMaTDHV.Text.Trim())))
+                    {
+                        trinhdobll.Insert(trinhdoenti);
+                        Load_trinhdohocvan();
+                    }
+                    else
+                        MessageBox.Show("Ma trinh do hoc van:"+ Matrinhdohocvan+ "da ton tai", "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("them bi loi:" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+            }
+            if (querytd == "sua")
+            {
+                try
+                {
+                    //khoi tao doi tuong
+                    TrinhDoHocVanEntities trinhdoenti = new TrinhDoHocVanEntities();
+                    trinhdoenti.Matrinhdohocvan = tbMaTDHV.Text.Trim();
+                    trinhdoenti.Trinhdohocvan = tbTrinhDo.Text.Trim();
+                    trinhdoenti.Chuyennganh = tbChuyenNganh.Text.Trim();
+                    TrinhDoHocVanBLL trinhdobll = new TrinhDoHocVanBLL();
+                    trinhdobll.update(trinhdoenti);
+                    Load_trinhdohocvan();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("sua bi loi:" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            if (querytd == "xoa")
+            {
+                try
+                {
+                    string matdhv = tbMaTDHV.Text.Trim();
+                    TrinhDoHocVanBLL trinhdobll = new TrinhDoHocVanBLL();
+                    trinhdobll.delete(matdhv);
+                    Load_trinhdohocvan();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("xoa bi loi:" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+        private void grvTrinhDo_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;
+            tbMaTDHV.Text = grvTrinhDo["Column", index].Value.ToString();
+            tbTrinhDo.Text = grvTrinhDo["TDHV", index].Value.ToString();
+            tbChuyenNganh.Text = grvTrinhDo["ChuyenNganh", index].Value.ToString();
+        }
+        private void btSuaTD_Click(object sender, EventArgs e)
+        {
+            Query = "sua";
+            ControllButton_trinhdo(2);
+            tbMaTDHV.ReadOnly = true;
+        }
+
+        private void btXoaTD_Click(object sender, EventArgs e)
+        {
+            Query = "xoa";
+            ControllButton_trinhdo(2);
+        }
+
+        private void btLuuTD_Click(object sender, EventArgs e)
+        {
+            Excute_trinhdo(Query);
+            ControllButton_trinhdo(1);
+        }
+
+        private void btHuyTD_Click(object sender, EventArgs e)
+        {
+            ControllButton_trinhdo(1);
+        }
+        private void ControllButton_trinhdo(int type)
+        {
+            btThemTD.Visible = type == 1 ? true : false;
+            btSuaTD.Visible = type == 1 ? true : false;
+            btXoaTD.Visible = type == 1 ? true : false;
+            btLuuTD.Visible = type == 2 ? true : false;
+            btHuyTD.Visible = type == 2 ? true : false;
+        }
+
+
+        public string Matrinhdohocvan { get; set; }
+        #endregion
+        #region"baohiem"
+        private void Load_baohiem()
+        {
+            BaoHiemBLL baohiembll = new BaoHiemBLL();
+            grvBaoHiem.DataSource = baohiembll.GetData();
+        }
+        private void btThemBH_Click(object sender, EventArgs e)
+        {
+            Query = "them";
+            ControllButton_baohiem(2);
+            tbMaBH.Text = "";
+            tbNV.Text = "";
+            tbNgayCap.Text = "";
+            tbNoiCap.Text = "";
+            rtbGhiChu.Text="";
+        }
+        private void Excute_baohiem(string querybh)
+        {
+            if (querybh == "them")
+            {
+                try
+                {
+                    BaoHiemEntities baohiementi = new BaoHiemEntities();
+                    baohiementi.Manv = tbNV.Text.Trim();
+                    baohiementi.Masbh = tbMaBH.Text.Trim();
+                    baohiementi.Songaycap = tbNgayCap.Text.Trim();
+                    baohiementi.Noicapso = tbNoiCap.Text.Trim();
+                    baohiementi.Ghichu = rtbGhiChu.Text.Trim();
+                    BaoHiemBLL baohiembll = new BaoHiemBLL();
+                    if (!(baohiembll.Checkbh(tbMaBH.Text.Trim())))
+                    {
+                        baohiembll.Insert(baohiementi);
+                        Load_baohiem();
+                    }
+                    else
+                        MessageBox.Show("ma bao hiem" + mabaohiem + "da ton tai", "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("them bi loi:" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            if (querybh == "sua")
+            {
+                try
+                {
+                    BaoHiemEntities baohiementi = new BaoHiemEntities();
+                    baohiementi.Manv = tbNV.Text.Trim();
+                    baohiementi.Masbh = tbMaBH.Text.Trim();
+                    baohiementi.Songaycap = tbNgayCap.Text.Trim();
+                    baohiementi.Noicapso = tbNoiCap.Text.Trim();
+                    baohiementi.Ghichu = rtbGhiChu.Text.Trim();
+                    BaoHiemBLL baohiembll = new BaoHiemBLL();
+                    baohiembll.update(baohiementi);
+                    Load_baohiem();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("sua bi loi:" + ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            if (querybh == "xoa")
+            {
+                try
+                {
+                    string masbh = tbBaoHiem.Text.Trim();
+                    BaoHiemBLL baohiembll = new BaoHiemBLL();
+                    baohiembll.delete(masbh);
+                    Load_baohiem();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("xoa bi loi" +ex.Message.ToString(), "thong bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+        private void btSuaBH_Click(object sender, EventArgs e)
+        {
+            Query = "sua";
+            ControllButton_baohiem(2);
+            tbBaoHiem.ReadOnly = true;
+        }
+
+        private void btXoaBH_Click(object sender, EventArgs e)
+        {
+            Query = "xoa";
+            ControllButton_baohiem(2);
+        }
+
+        private void btLuuBH_Click(object sender, EventArgs e)
+        {
+            Excute_baohiem(Query);
+            ControllButton_baohiem(1);
+        }
+
+        private void btHuyBH_Click(object sender, EventArgs e)
+        {
+            ControllButton_baohiem(1);
+        }
+
+        private void grvBaoHiem_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;
+            tbNV.Text = grvBaoHiem["Column5", index].Value.ToString();
+            tbMaBH.Text = grvBaoHiem["MaSBH", index].Value.ToString();
+            tbNgayCap.Text = grvBaoHiem["NgayCapSo", index].Value.ToString();
+            tbNoiCap.Text = grvBaoHiem["NoiCapSo", index].Value.ToString();
+            rtbGhiChu.Text = grvBaoHiem["Column6", index].Value.ToString();
+        }
+        private void ControllButton_baohiem(int type)
+        {
+            btThemBH.Visible = type == 1 ? true : false;
+            btSuaBH.Visible = type == 1 ? true : false;
+            btXoaBH.Visible = type == 1 ? true : false;
+            btLuuBH.Visible = type == 2 ? true : false;
+            btHuyBH.Visible = type == 2 ? true : false;
+        }
+        #endregion
+        #region"TimKiem"
+        private void Load_timkiem()
+        {
+            NhanVienBLL nvBLL = new NhanVienBLL();
+            grvTimKiem.DataSource = nvBLL.GetData();
+        }
+        private void rdbMaNV_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbMaNV.Checked == true)
+            {
+                tbtimMaNV.Enabled = true;
+                tbtimHoTen.Enabled = false;
+                tbtimCMND.Enabled = false;
+            }
+        }
+
+        private void rdbTenNV_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbTenNV.Checked == true)
+            {
+                tbtimMaNV.Enabled = false;
+                tbtimHoTen.Enabled = true;
+                tbtimCMND.Enabled = false;
+            }
+
+        }
+
+        private void rdbSoCMND_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbSoCMND.Checked == true)
+            {
+                tbtimMaNV.Enabled = false;
+                tbtimHoTen.Enabled = false;
+                tbtimCMND.Enabled = true;
+            }
+        }
+
+        private void tbtimMaNV_TextChanged(object sender, EventArgs e)
+        {
+            string _item = tbtimMaNV.Text.Trim();
+            NhanVienBLL nvBLL = new NhanVienBLL();
+            grvTimKiem.DataSource= nvBLL.Finditem(_item);
+        }
+
+        private void btTimKiem_Click(object sender, EventArgs e)
+        {
+            if (rdbMaNV.Checked == true)
+            {
+                string _item = tbtimMaNV.Text.Trim();
+                NhanVienBLL nvBLL = new NhanVienBLL();
+                grvTimKiem.DataSource = nvBLL.Finditem(_item);
+            }
+            if (rdbTenNV.Checked == true)
+            {
+                string _item = tbtimHoTen.Text.Trim();
+                NhanVienBLL nvBLL = new NhanVienBLL();
+                grvTimKiem.DataSource = nvBLL.Finditem(_item);
+            }
+            if (rdbSoCMND.Checked == true)
+            {
+                string _item = tbtimCMND.Text.Trim();
+                NhanVienBLL nvBLL = new NhanVienBLL();
+                grvTimKiem.DataSource = nvBLL.Finditem(_item);
+            }
+        }
+
+        private void tbtimHoTen_TextChanged(object sender, EventArgs e)
+        {
+            string _item = tbtimHoTen.Text.Trim();
+            NhanVienBLL nvBLL = new NhanVienBLL();
+            grvTimKiem.DataSource = nvBLL.Finditem(_item);
+        }
+
+        private void tbtimCMND_TextChanged(object sender, EventArgs e)
+        {
+            string _item = tbtimCMND.Text.Trim();
+            NhanVienBLL nvBLL=new NhanVienBLL();
+            grvTimKiem.DataSource=nvBLL.Finditem(_item);
+        }
+        #endregion
+        #region"BaoCao"
+        private void Load_Baocao()
+        {
+            NhanVienBLL nvBLL = new NhanVienBLL();
+            grvBaoCao.DataSource = nvBLL.GetData();
+        }
+        private void Load_Baocaoluong()
+        {
+            LuongBLL luong = new LuongBLL();
+            grvBaoCao.DataSource = luong.GetData();
+        }
+        private void btDanhSachNV_Click(object sender, EventArgs e)
+        {
+            Load_Baocao();
+        }
+
+        private void btLuongNV_Click(object sender, EventArgs e)
+        {
+            Load_Baocaoluong();
+        }
+        #endregion
     }
-	
-}
+ }

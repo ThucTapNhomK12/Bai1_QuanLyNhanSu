@@ -40,11 +40,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 47);
+            this.label1.Location = new System.Drawing.Point(46, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Username ";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // lbQuenMK
             // 
@@ -55,10 +56,11 @@
             this.lbQuenMK.TabIndex = 2;
             this.lbQuenMK.TabStop = true;
             this.lbQuenMK.Text = "Quên mật khẩu?";
+            this.lbQuenMK.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // tbusername
             // 
-            this.tbusername.Location = new System.Drawing.Point(141, 47);
+            this.tbusername.Location = new System.Drawing.Point(135, 39);
             this.tbusername.Name = "tbusername";
             this.tbusername.Size = new System.Drawing.Size(194, 20);
             this.tbusername.TabIndex = 3;
@@ -66,23 +68,23 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(52, 106);
+            this.label2.Location = new System.Drawing.Point(46, 98);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Password";
+            this.label2.Click += new System.EventHandler(this.label1_Click);
             // 
             // tbpassword
             // 
-            this.tbpassword.Location = new System.Drawing.Point(141, 103);
+            this.tbpassword.Location = new System.Drawing.Point(135, 95);
             this.tbpassword.Name = "tbpassword";
-            this.tbpassword.PasswordChar = '*';
             this.tbpassword.Size = new System.Drawing.Size(194, 20);
             this.tbpassword.TabIndex = 3;
             // 
             // btDangNhap
             // 
-            this.btDangNhap.Location = new System.Drawing.Point(217, 209);
+            this.btDangNhap.Location = new System.Drawing.Point(161, 209);
             this.btDangNhap.Name = "btDangNhap";
             this.btDangNhap.Size = new System.Drawing.Size(75, 23);
             this.btDangNhap.TabIndex = 0;
@@ -92,7 +94,7 @@
             // 
             // btDoiMK
             // 
-            this.btDoiMK.Location = new System.Drawing.Point(86, 209);
+            this.btDoiMK.Location = new System.Drawing.Point(27, 209);
             this.btDoiMK.Name = "btDoiMK";
             this.btDoiMK.Size = new System.Drawing.Size(87, 23);
             this.btDoiMK.TabIndex = 0;
@@ -113,7 +115,8 @@
             this.Controls.Add(this.btDoiMK);
             this.Controls.Add(this.btDangNhap);
             this.Name = "MatKhau";
-            this.Text = "Đăng nhập";
+            this.Text = "MatKhau";
+            this.Load += new System.EventHandler(this.MatKhau_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
