@@ -55,15 +55,7 @@ namespace NhanSu.Business
             result = config.excuteNonquery(strQuery);//thucthi
             return result;//tra ve so ban ghi
         }
-        //xoa
-        public int delete(string macv)
-        {
-            int result = 0;
-            string strQuery = "delete from dbo.ChucVu where MaChucVu='"+macv+"'";
-            DataConfig config = new DataConfig();
-            result = config.excuteNonquery(strQuery);//thucthi
-            return result;//tra ve so ban ghi
-        }
+       
     }
     }
 
