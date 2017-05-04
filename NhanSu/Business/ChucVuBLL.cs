@@ -47,14 +47,7 @@ namespace NhanSu.Business
                 return true;
             return false;
         }
-        public int update(ChucVuEntities obj)
-        {
-            int result = 0;
-            string strQuery = "update dbo.ChucVu set TenChucVu='"+obj.Tencv+"',PhuCapCV='"+obj.Phucapcv+"' where MaChucVu='"+obj.Macv+"'";
-            DataConfig config = new DataConfig();
-            result = config.excuteNonquery(strQuery);//thucthi
-            return result;//tra ve so ban ghi
-        }
+        
        
     }
     }
