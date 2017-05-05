@@ -36,19 +36,11 @@ namespace NhanSu.Business
             result = config.excuteNonquery(strQuery);//thucthi
             return result;//tra ve so ban ghi
         }
-        public bool Checkid(string macv)
-        {
-            bool result = true;
-            DataConfig config = new DataConfig();
-            string strQuery = "select *from dbo.ChucVu where MaChucVu='" + macv + "'";
-            DataTable dt = new DataTable();
-            dt = config.GetData(strQuery);
-            if (dt.Rows.Count > 0)
-                return true;
-            return false;
-        }
-        
        
-    }
+    }
+	
+	
+	
+	
     }
 
