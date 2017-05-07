@@ -37,7 +37,23 @@ namespace NhanSu.Business
                 return true;
             return false;
         }
-       
+        public int update(PhongBanEntities obj)
+        {
+            int result = 0;
+            string strQuery = "update dbo.PhongBan set TenPhongBan='" + obj.Tenpb + "', SoDienThoai='" + obj.Sdt + "' where MaPhongBan='" + obj.Mapb + "'";
+            DataConfig config = new DataConfig();
+            result = config.excuteNonquery(strQuery);//thucthi
+            return result;//tra ve so ban ghi
+        }
+        //xoa
+        public int delete(string Mapb)
+        {
+            int result = 0;
+            string strQuery = "delete from dbo.PhongBan where MaPhongBan='" + Mapb + "'";
+            DataConfig config = new DataConfig();
+            result = config.excuteNonquery(strQuery);//thucthi
+            return result;//tra ve so ban ghi
+        }
 
     }
 }
