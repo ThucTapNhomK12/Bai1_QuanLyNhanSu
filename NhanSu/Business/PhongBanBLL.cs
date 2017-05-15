@@ -46,14 +46,7 @@ namespace NhanSu.Business
             return result;//tra ve so ban ghi
         }
         //xoa
-        public int delete(string Mapb)
-        {
-            int result = 0;
-            string strQuery = "delete from dbo.PhongBan where MaPhongBan='" + Mapb + "'";
-            DataConfig config = new DataConfig();
-            result = config.excuteNonquery(strQuery);//thucthi
-            return result;//tra ve so ban ghi
-        }
+       
 
     }
 }
