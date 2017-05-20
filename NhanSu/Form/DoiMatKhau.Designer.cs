@@ -44,7 +44,6 @@
             // 
             this.tbMatKhauCu.Location = new System.Drawing.Point(150, 85);
             this.tbMatKhauCu.Name = "tbMatKhauCu";
-            this.tbMatKhauCu.PasswordChar = '*';
             this.tbMatKhauCu.Size = new System.Drawing.Size(205, 20);
             this.tbMatKhauCu.TabIndex = 0;
             // 
@@ -54,7 +53,7 @@
             this.btNhapLai.Name = "btNhapLai";
             this.btNhapLai.Size = new System.Drawing.Size(75, 23);
             this.btNhapLai.TabIndex = 1;
-            this.btNhapLai.Text = "Nhập Lại";
+            this.btNhapLai.Text = "Nhap Lại";
             this.btNhapLai.UseVisualStyleBackColor = true;
             this.btNhapLai.Click += new System.EventHandler(this.btNhapLai_Click);
             // 
@@ -71,7 +70,6 @@
             // 
             this.bXacNhanMK.Location = new System.Drawing.Point(150, 180);
             this.bXacNhanMK.Name = "bXacNhanMK";
-            this.bXacNhanMK.PasswordChar = '*';
             this.bXacNhanMK.Size = new System.Drawing.Size(205, 20);
             this.bXacNhanMK.TabIndex = 0;
             // 
@@ -82,13 +80,12 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(121, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Xác Nhận Lại Mật Khẩu";
+            this.label2.Text = "Xac Nhận Lại Mật Khẩu";
             // 
             // tbMatKhauMoi
             // 
             this.tbMatKhauMoi.Location = new System.Drawing.Point(150, 133);
             this.tbMatKhauMoi.Name = "tbMatKhauMoi";
-            this.tbMatKhauMoi.PasswordChar = '*';
             this.tbMatKhauMoi.Size = new System.Drawing.Size(205, 20);
             this.tbMatKhauMoi.TabIndex = 0;
             // 
@@ -123,9 +120,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(58, 41);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(81, 13);
+            this.label4.Size = new System.Drawing.Size(84, 13);
             this.label4.TabIndex = 2;
-            this.label4.Text = "Tên đăng nhập";
+            this.label4.Text = "Ten Dang Nhap";
             // 
             // DoiMatKhau
             // 
