@@ -1,0 +1,23 @@
+c:\users\tranhuyentrang\documents\visual studio 2013\Projects\NhanSu\NhanSu\bin\Debug\NhanSu.exe.config
+C:\Users\tranhuyentrang\Desktop\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.DoiMatKhau.resources
+C:\Users\tranhuyentrang\Desktop\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.Form1.resources
+C:\Users\tranhuyentrang\Desktop\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.MatKhau.resources
+C:\Users\tranhuyentrang\Desktop\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.Properties.Resources.resources
+C:\Users\tranhuyentrang\Desktop\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.csproj.GenerateResource.Cache
+C:\Users\tranhuyentrang\Desktop\NhanSu (1)\NhanSu\NhanSu\bin\Debug\NhanSu.exe.config
+C:\Users\tranhuyentrang\Desktop\NhanSu (1)\NhanSu\NhanSu\bin\Debug\NhanSu.exe
+C:\Users\tranhuyentrang\Desktop\NhanSu (1)\NhanSu\NhanSu\bin\Debug\NhanSu.pdb
+C:\Users\tranhuyentrang\Desktop\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.exe
+C:\Users\tranhuyentrang\Desktop\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.pdb
+C:\Users\tranhuyentrang\Desktop\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.csprojResolveAssemblyReference.cache
+C:\Users\asus\Downloads\NhanSu (1)\NhanSu\NhanSu\bin\Debug\NhanSu.exe.config
+C:\Users\asus\Downloads\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.exe
+C:\Users\asus\Downloads\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.pdb
+C:\Users\asus\Downloads\NhanSu (1)\NhanSu\NhanSu\bin\Debug\NhanSu.exe
+C:\Users\asus\Downloads\NhanSu (1)\NhanSu\NhanSu\bin\Debug\NhanSu.pdb
+C:\Users\asus\Downloads\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.csprojResolveAssemblyReference.cache
+C:\Users\asus\Downloads\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.DoiMatKhau.resources
+C:\Users\asus\Downloads\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.Form1.resources
+C:\Users\asus\Downloads\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.MatKhau.resources
+C:\Users\asus\Downloads\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.Properties.Resources.resources
+C:\Users\asus\Downloads\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.csproj.GenerateResource.Cache
