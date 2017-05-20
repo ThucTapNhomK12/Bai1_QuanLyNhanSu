@@ -35,3 +35,6 @@ E:\Ky8\TTN_Bai1_QuanLyNhanSu\NhanSu\NhanSu\bin\Debug\NhanSu.pdb
 E:\Ky8\NhanSu-v2\NhanSu\NhanSu\bin\Debug\NhanSu.exe.config
 E:\Ky8\NhanSu-v2\NhanSu\NhanSu\obj\Debug\NhanSu.exe
 E:\Ky8\NhanSu-v2\NhanSu\NhanSu\obj\Debug\NhanSu.pdb
+E:\Ky8\Source_code_GIT\Bai1_QuanLyNhanSu\NhanSu\NhanSu\bin\Debug\NhanSu.exe.config
+E:\Ky8\Source_code_GIT\Bai1_QuanLyNhanSu\NhanSu\NhanSu\obj\Debug\NhanSu.exe
+E:\Ky8\Source_code_GIT\Bai1_QuanLyNhanSu\NhanSu\NhanSu\obj\Debug\NhanSu.pdb
