@@ -12,7 +12,7 @@ namespace NhanSu.DataAccess
     class DataConfig
     {
         private SqlConnection conn; //khai bao bien connec
-        public string strConnec = @"Data Source=.;Initial Catalog=QLNhanSu;Integrated Security=True";//chuoi ket noi
+        public string strConnec = @"Data Source=NGUYENCAOSON\CAOSON;Initial Catalog=QLNhanSu;Integrated Security=True";//chuoi ket noi
         //khoi tao mac dinh
         public DataConfig()
         {

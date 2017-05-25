@@ -21,3 +21,14 @@ C:\Users\asus\Downloads\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.Form1.resource
 C:\Users\asus\Downloads\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.MatKhau.resources
 C:\Users\asus\Downloads\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.Properties.Resources.resources
 C:\Users\asus\Downloads\NhanSu (1)\NhanSu\NhanSu\obj\Debug\NhanSu.csproj.GenerateResource.Cache
+D:\thuctapnhom\Bai1_QuanLyNhanSu\NhanSu\NhanSu\bin\Debug\NhanSu.exe.config
+D:\thuctapnhom\Bai1_QuanLyNhanSu\NhanSu\NhanSu\obj\Debug\NhanSu.exe
+D:\thuctapnhom\Bai1_QuanLyNhanSu\NhanSu\NhanSu\obj\Debug\NhanSu.pdb
+D:\thuctapnhom\Bai1_QuanLyNhanSu\NhanSu\NhanSu\bin\Debug\NhanSu.exe
+D:\thuctapnhom\Bai1_QuanLyNhanSu\NhanSu\NhanSu\bin\Debug\NhanSu.pdb
+D:\thuctapnhom\Bai1_QuanLyNhanSu\NhanSu\NhanSu\obj\Debug\NhanSu.csprojResolveAssemblyReference.cache
+D:\thuctapnhom\Bai1_QuanLyNhanSu\NhanSu\NhanSu\obj\Debug\NhanSu.DoiMatKhau.resources
+D:\thuctapnhom\Bai1_QuanLyNhanSu\NhanSu\NhanSu\obj\Debug\NhanSu.Form1.resources
+D:\thuctapnhom\Bai1_QuanLyNhanSu\NhanSu\NhanSu\obj\Debug\NhanSu.MatKhau.resources
+D:\thuctapnhom\Bai1_QuanLyNhanSu\NhanSu\NhanSu\obj\Debug\NhanSu.Properties.Resources.resources
+D:\thuctapnhom\Bai1_QuanLyNhanSu\NhanSu\NhanSu\obj\Debug\NhanSu.csproj.GenerateResource.Cache
